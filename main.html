@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8">
+    <title>360 Wideo</title>
+    <link rel="stylesheet" type="text/css" href="css.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700&display=swap" rel="stylesheet"> 
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <script src="http://code.playcanvas.com/playcanvas-latest.js"></script>
+    <script src="three.js"></script>
+</head>
+<body>
+    <div class="header" >
+        <h1>360 video-player</h1>
+    </div>
+
+    <div class="main-con">
+        <div class="video-form">
+            <div class="flex-con">
+
+                <div class="canvas-con">
+                    <form id='video'>
+                        <label for="file-upload" class="custom-file-upload">
+                            <i class="fa fa-cloud-upload"></i>Upload Video
+                        </label>
+                        <input id="file-upload" type="file"/>
+
+                    </form>
+                  
+                </div>
+                <div class="options">
+
+                    Options:
+                    <span class="edges">Show edges of sphere</span>
+                
+                    <span class="texture">Turn texture on/off</span>
+		
+                    <span class="full" >Turn fullmode on/off</span>
+					<div>Camera position:</div>
+                    <div class='plus'><i class="fa fa-plus"></i>Forward</div>
+                    <div class='minus'><i class="fa fa-minus"></i>Back</div>
+					<div>Change scale of sphere:</div>
+						<div class="flex-row">
+						<div class='scale Y'>Y:</div>
+						
+							<div class="scale-option Yplus"><i class="fa fa-plus"></i></div><div class="scale-option Yminus"><i class="fa fa-minus"></i></div>
+						</div>
+							<div class="flex-row">
+						<div class='scale X'>X:</div>
+						
+							<div class="scale-option Xplus"><i class="fa fa-plus"></i></div><div class="scale-option Xminus"><i class="fa fa-minus"></i></div>
+						</div>
+							<div class="flex-row">
+						<div class='scale Z'>Z:</div>
+					
+								<div class="scale-option Zplus"><i class="fa fa-plus"></i></div><div class="scale-option Zminus"><i class="fa fa-minus"></i></div>
+						</div>
+                </div>
+
+            </div>
+          
+              <div class="progress-bar-parent">
+                <div class="video-options">
+                    Start Video
+                </div>
+                <div class="progress-bar-background">
+                  <div class="progress-bar"></div>
+                </div>
+              </div>
+        </div>
+    </div>
+<script src="js_v2.js"></script>
+<script>
+    $(window).on('load', function () {
+
+
+
+        $("#file-upload").change(function () {
+            let src = document.getElementById("file-upload").files[0].name;
+            $('.custom-file-upload').fadeOut();
+            $('.progress-bar-parent').slideDown();
+                                init('video/' +src);
+                                animate();
+			 $('.options').fadeIn();
+			 $('.options').css('display','flex');
+        });
+        $('.full').on('click',function(){
+            $('#video').next().toggleClass('full');
+
+         });
+         
+         $(document).keyup(function(e) {
+            
+            if (e.keyCode === 27) $('.full').trigger('click');   // esc
+          });
+    });
+</script>
+</body>
+</html>
+
